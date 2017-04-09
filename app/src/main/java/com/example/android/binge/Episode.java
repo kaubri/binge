@@ -9,4 +9,7 @@ package com.example.android.binge;
  */
 
 public class Episode {
+    public Episode() {
+
+    }
 }
