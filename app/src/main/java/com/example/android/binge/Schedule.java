@@ -1,6 +1,8 @@
 package com.example.android.binge;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Model for a day schedule information
@@ -16,10 +18,12 @@ public class Schedule {
     int mSchoolMinutes;
     Date mDate;
     int mMiscMinutes;
-
+//TODO create a validation to ensure that all non free time mins don't exceed that of the total day
     public Schedule() {
 
     }
+
+
 
     public Schedule(int workMinutes,
                     int sleepMinutes,
@@ -34,7 +38,11 @@ public class Schedule {
     }
 
     public int getFreeTime() {
-        return 0;
+        GregorianCalendar currentDay = new GregorianCalendar();
+        int freeTime= currentDay.getActualMaximum(Calendar.MINUTE);
+
+        freeTime -= (getMiscMinutes() + getMiscMinutes() + getSchoolMinutes() + getSleepMinutes());
+        return freeTime ;
     }
     public int getWorkMinutes() {
         return mWorkMinutes;

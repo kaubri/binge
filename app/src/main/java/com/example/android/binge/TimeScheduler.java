@@ -12,31 +12,58 @@ import java.util.Iterator;
 public class TimeScheduler {
     private int mRemainingTime;
     private Date mDate;
-    private Date mEndDate;
     private ScheduleList mScheduleList;
-    private Series mSeries;
 
     public TimeScheduler(ScheduleList scheduleList, Series series, Date startDate) {
-        mScheduleList=scheduleList;
-        mRemainingTime=series.getTotalTime();
-
-        mDate =startDate;
+        setScheduleList(scheduleList);
+        setRemainingTime(series.getTotalTime());
+        setDate(startDate);
 
     }
+
+    //TODO make various versions of get Endate
 
     public Date getEndDate() {
-        Iterator<Schedule> schedule= mScheduleList.iterator();
-        GregorianCalendar endDate = new GregorianCalendar();
-        endDate.setGregorianChange(mDate);
 
-        while (mRemainingTime <= 0) {
-            if (schedule.hasNext() == false) {
-                schedule=mScheduleList.iterator();
+        Iterator<Schedule> scheduleIterator = mScheduleList.iterator();
+        GregorianCalendar dateCalendar = new GregorianCalendar();
+        dateCalendar.setTime(mDate);
+
+        while (mRemainingTime > 0) {
+            if (scheduleIterator.hasNext() == false) {
+                scheduleIterator = mScheduleList.iterator();
             }
-            int currentFreeTime=schedule.next().getFreeTime();
-            mRemainingTime-=currentFreeTime;
-            endDate.add(Calendar.MINUTE, currentFreeTime);
+            int dayFreeTime = scheduleIterator.next().getFreeTime();
+            mRemainingTime-=  dayFreeTime;
+            System.out.println("Calc Remainign Time: " + mRemainingTime);
+            dateCalendar.add(Calendar.DATE, 1);
+
+
         }
-        return endDate.getTime();
+        return dateCalendar.getTime();
     }
+    public int getRemainingTime() {
+        return mRemainingTime;
+    }
+
+    public void setRemainingTime(int remainingTime) {
+        mRemainingTime = remainingTime;
+    }
+
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date date) {
+        mDate = date;
+    }
+
+    public ScheduleList getScheduleList() {
+        return mScheduleList;
+    }
+
+    public void setScheduleList(ScheduleList scheduleList) {
+        mScheduleList = scheduleList;
+    }
+
 }

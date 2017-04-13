@@ -1,5 +1,6 @@
 package com.example.android.binge;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -11,6 +12,8 @@ import java.util.GregorianCalendar;
 
 public class TimeSchedulerTest {
 
+    //TODO add a test for a schedule with time
+
     @Test
     public  void Given_24HourFreeTimeScheduleAndTwoDaySeries_When_GetingAEndDate_Then_EndDaateShouldBe48HrsLateer() {
 
@@ -18,9 +21,13 @@ public class TimeSchedulerTest {
         Schedule schedule= new Schedule(0,0,0,testStartDate.getTime(),0 );
         ScheduleList scheduleList = new ScheduleList(schedule);
 
-        Series series = new Series("Bleach", "Ichigo saves rukia", 200, null, 8, 2880, Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime());
+        Series series = new Series("Bleach", "Ichigo saves rukia", 200, null, 8, 72, Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime());
+        System.out.println("StartDate is: " + testStartDate.getTime());
+        TimeScheduler timeScheduler = new TimeScheduler(scheduleList, series,testStartDate.getTime());
 
-        TimeScheduler timeScheduler = new TimeScheduler(scheduleList, series, new GregorianCalendar(2017, 04, 13).getTime());
-        System.out.println("The end date is: " + timeScheduler.getEndDate());
+        System.out.println("EndDate is: " + timeScheduler.getEndDate());
+
+
+
     }
 }

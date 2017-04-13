@@ -26,6 +26,7 @@ public class Series {
     private  Status mStatus;
     private Date mStartDate;
     private Date mEndDate;
+    private SeriesGrabber mSeriesGrabber;
 
     public Series(SeriesGrabber seriesGrabber) {
         setTitle(seriesGrabber.getTitle());
@@ -125,7 +126,7 @@ public class Series {
      * Returns the total time of the series in minutes.
      */
     public int getTotalTime() {
-        return 0;
+        return mTotalTime  ;
     }
 
 
