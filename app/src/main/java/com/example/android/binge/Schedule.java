@@ -32,6 +32,10 @@ public class Schedule {
         setDate(date);
         setMiscMinutes(miscMinutes);
     }
+
+    public int getFreeTime() {
+        return 0;
+    }
     public int getWorkMinutes() {
         return mWorkMinutes;
     }

@@ -15,20 +15,35 @@ public class Series {
     private String mTitle;
     private String mSynopsis;
     private int mNumberOfEpisodes;
+    private int mTotalTime;
+
+    public void setTotalTime(int totalTime) {
+        mTotalTime = totalTime;
+    }
+
     private List<Episode> mEpisodeList;
     private int mNumberOfSeasons;
     private  Status mStatus;
     private Date mStartDate;
     private Date mEndDate;
 
-    public Series() {
-
+    public Series(SeriesGrabber seriesGrabber) {
+        setTitle(seriesGrabber.getTitle());
+        setSynopsis(seriesGrabber.getSynopsis());
+        setNumberOfEpisodes(seriesGrabber.getNumberOfEpisodes());
+        setEpisodeList(seriesGrabber.getEpisodeList());
+        setNumberOfSeasons(seriesGrabber.getNumberOfSeasons());
+        setTotalTime(seriesGrabber.getTotalTime());
+        setStatus(seriesGrabber.getStatus());
+        setStartDate(seriesGrabber.getStartDate());
+        setEndDate(seriesGrabber.getEndDate());
     }
     public Series( String title,
                    String synopsis,
                    int numberOfEpisodes,
                    List<Episode> episodeList,
                    int numberOfSeasons,
+                   int totalTime,
                    Status status,
                    Date startDate,
                    Date endDate) {
@@ -37,6 +52,7 @@ public class Series {
         setNumberOfEpisodes(numberOfEpisodes);
         setEpisodeList(episodeList);
         setNumberOfSeasons(numberOfSeasons);
+        setTotalTime(totalTime);
         setStatus(status);
         setStartDate(startDate);
         setEndDate(endDate);
@@ -105,6 +121,12 @@ public class Series {
         mEndDate = endDate;
     }
 
+    /**
+     * Returns the total time of the series in minutes.
+     */
+    public int getTotalTime() {
+        return 0;
+    }
 
 
     public enum Status {

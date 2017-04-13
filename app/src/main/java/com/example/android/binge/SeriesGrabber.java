@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public interface SeriesGrabber {
-    public List<Episode> getEpisodes();
+    public List<Episode> getEpisodeList();
 
     public String getTitle();
     public String getSynopsis();
@@ -21,4 +21,5 @@ public interface SeriesGrabber {
     public Series.Status getStatus();
     public Date getStartDate();
     public Date getEndDate();
+    public int getTotalTime();
 }
