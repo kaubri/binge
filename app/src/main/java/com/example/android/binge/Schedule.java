@@ -2,12 +2,11 @@ package com.example.android.binge;
 
 import android.support.annotation.Nullable;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
- * Model for a day schedule information. This version assumes a day has 24 hours.
+ * Model for a day schedule information. This version assumes a day has 24 hours. If Schedule is started on a partial
+ * day it is best to get the rest of the free time.
  *
  * @author Donovan J. Wilder
  * @since 2017-04-09
@@ -15,11 +14,7 @@ import java.util.GregorianCalendar;
  */
 
 public class Schedule {
-    int mWorkMinutes; //Will use busy time instead
-    int mSleepMinutes; //will use busy time instead
-    int mSchoolMinutes; //Will use busy time instead
     Date mDate;
-    int mMiscMinutes; //Will use busy time instead
     int mViewingFrequency;
     int mTimeBetweenShows;
     int mVariousBreaks;
@@ -78,17 +73,6 @@ public class Schedule {
         setBusyTime(busyTime);
         setDate(date);
     }
-    public Schedule(int workMinutes,
-                    int sleepMinutes,
-                    int schoolMinutes,
-                    Date date,
-                    int miscMinutes) {
-        setWorkMinutes(workMinutes);
-        setSleepMinutes(sleepMinutes);
-        setSchoolMinutes(schoolMinutes);
-        setDate(date);
-        setMiscMinutes(miscMinutes);
-    }
 
     /**
      * Returns the number of minutes the user can use to binge watch a seires. The value is based on
@@ -105,29 +89,6 @@ public class Schedule {
 
         return (Time.hoursToMinutes(24) - getBusyTime());
     }
-    public int getWorkMinutes() {
-        return mWorkMinutes;
-    }
-
-    public void setWorkMinutes(int workMinutes) {
-        mWorkMinutes = workMinutes;
-    }
-
-    public int getSleepMinutes() {
-        return mSleepMinutes;
-    }
-
-    public void setSleepMinutes(int sleepMinutes) {
-        mSleepMinutes = sleepMinutes;
-    }
-
-    public int getSchoolMinutes() {
-        return mSchoolMinutes;
-    }
-
-    public void setSchoolMinutes(int schoolMinutes) {
-        mSchoolMinutes = schoolMinutes;
-    }
 
     public Date getDate() {
         return mDate;
@@ -137,11 +98,4 @@ public class Schedule {
         mDate = date;
     }
 
-    public int getMiscMinutes() {
-        return mMiscMinutes;
-    }
-
-    public void setMiscMinutes(int miscMinutes) {
-        mMiscMinutes = miscMinutes;
-    }
 }
