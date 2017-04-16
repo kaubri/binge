@@ -27,6 +27,15 @@ public class Series {
     private Date mStartDate;
     private Date mEndDate;
     private SeriesGrabber mSeriesGrabber;
+    private int mAverageEpisodeLength;
+
+    public int getAverageEpisodeLength() {
+        return mAverageEpisodeLength;
+    }
+
+    public void setAverageEpisodeLength(int averageEpisodeLength) {
+        mAverageEpisodeLength = averageEpisodeLength;
+    }
 
     public Series(SeriesGrabber seriesGrabber) {
         setTitle(seriesGrabber.getTitle());
@@ -43,6 +52,7 @@ public class Series {
                    String synopsis,
                    int numberOfEpisodes,
                    List<Episode> episodeList,
+                   int averageEpisodeTime,
                    int numberOfSeasons,
                    int totalTime,
                    Status status,
@@ -50,6 +60,7 @@ public class Series {
                    Date endDate) {
         setTitle(title);
         setSynopsis(synopsis);
+        setAverageEpisodeLength(averageEpisodeTime);
         setNumberOfEpisodes(numberOfEpisodes);
         setEpisodeList(episodeList);
         setNumberOfSeasons(numberOfSeasons);

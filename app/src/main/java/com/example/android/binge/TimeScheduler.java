@@ -7,40 +7,76 @@ import java.util.Iterator;
 
 /**
  * Created by dwilder1181 on 4/12/2017.
+ * There are a couple of ways that you can dedduct te time
  */
 
 public class TimeScheduler {
     private int mRemainingTime;
-    private Date mDate;
+    private Date mStartDate;
     private ScheduleList mScheduleList;
-
-    public TimeScheduler(ScheduleList scheduleList, Series series, Date startDate) {
+    private Series mSeries;
+    private Date mEndDate;
+    public TimeScheduler(ScheduleList scheduleList, Series series, Date startDate) throws LowFreeTimeException {
         setScheduleList(scheduleList);
         setRemainingTime(series.getTotalTime());
-        setDate(startDate);
+        setStartDate(new Date(startDate.getTime()));
+        setEndDate(new Date(startDate.getTime()));
+        mSeries=series;
+        calcEndDate();
 
     }
 
+    public Series getSeries() {
+        return mSeries;
+    }
+
+    public void setSeries(Series series) {
+        mSeries = series;
+    }
+
+    public String getRawTime() {
+        return Time.minsToBiggestUnitString(getSeries().getTotalTime());
+
+    }
     //TODO make various versions of get Endate
 
     public Date getEndDate() {
+        return mEndDate;
+    }
 
-        Iterator<Schedule> scheduleIterator = mScheduleList.iterator();
-        GregorianCalendar dateCalendar = new GregorianCalendar();
-        dateCalendar.setTime(mDate);
+    public void setEndDate(Date endDate) {
+        mEndDate = endDate;
+    }
 
-        while (mRemainingTime > 0) {
+    private void calcEndDate() throws LowFreeTimeException {
+
+        Iterator<Schedule> scheduleIterator = getScheduleList().iterator();
+        GregorianCalendar endDateCalendar = new GregorianCalendar();
+        endDateCalendar.setTime(getEndDate());
+
+        while (getRemainingTime() > 0) {
             if (scheduleIterator.hasNext() == false) {
-                scheduleIterator = mScheduleList.iterator();
+                scheduleIterator = getScheduleList().iterator();
             }
-            int dayFreeTime = scheduleIterator.next().getFreeTime();
-            mRemainingTime-=  dayFreeTime;
-            System.out.println("Calc Remainign Time: " + mRemainingTime);
-            dateCalendar.add(Calendar.DATE, 1);
+            Schedule currentSchedule= scheduleIterator.next();
+            int dayFreeTime = currentSchedule.getFreeTime();
+
+            if(currentSchedule.getViewingFrequency()>-1){
+
+                int maxViewingTime=(currentSchedule.getViewingFrequency()*mSeries.getAverageEpisodeLength());
+                if (maxViewingTime > currentSchedule.getFreeTime()) {
+                    throw new LowFreeTimeException("FreeTime: " +currentSchedule.getFreeTime()+" Viewing time needed: " + maxViewingTime +" Viewing Frequency: " +currentSchedule.getViewingFrequency()+ " Average episode length: " + getSeries().getAverageEpisodeLength());
+                }
+                setRemainingTime(getRemainingTime()-maxViewingTime);
+            }else {
+                setRemainingTime(getRemainingTime()- dayFreeTime);
+            }
+            //System.out.println("Calc Remainign Time: " + mRemainingTime);
+            endDateCalendar.add(Calendar.DATE, 1);
 
 
         }
-        return dateCalendar.getTime();
+         setEndDate(endDateCalendar.getTime());
     }
     public int getRemainingTime() {
         return mRemainingTime;
@@ -50,12 +86,12 @@ public class TimeScheduler {
         mRemainingTime = remainingTime;
     }
 
-    public Date getDate() {
-        return mDate;
+    public Date getStartDate() {
+        return mStartDate;
     }
 
-    public void setDate(Date date) {
-        mDate = date;
+    public void setStartDate(Date startDate) {
+        mStartDate = startDate;
     }
 
     public ScheduleList getScheduleList() {
