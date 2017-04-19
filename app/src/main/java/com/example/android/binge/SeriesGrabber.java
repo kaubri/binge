@@ -1,5 +1,7 @@
 package com.example.android.binge;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 import java.util.List;
 
@@ -22,4 +24,5 @@ public interface SeriesGrabber {
     public Date getStartDate();
     public Date getEndDate();
     public int getTotalTime();
+    public Bitmap getBitmapImage();
 }

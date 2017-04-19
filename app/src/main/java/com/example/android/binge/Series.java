@@ -1,5 +1,7 @@
 package com.example.android.binge;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +30,15 @@ public class Series {
     private Date mEndDate;
     private SeriesGrabber mSeriesGrabber;
     private int mAverageEpisodeLength;
+    private Bitmap mImage;
+
+    public Bitmap getImage() {
+        return mImage;
+    }
+
+    public void setImage(Bitmap image) {
+        mImage = image;
+    }
 
     public int getAverageEpisodeLength() {
         return mAverageEpisodeLength;
@@ -47,6 +58,7 @@ public class Series {
         setStatus(seriesGrabber.getStatus());
         setStartDate(seriesGrabber.getStartDate());
         setEndDate(seriesGrabber.getEndDate());
+        setImage(seriesGrabber.getBitmapImage());
     }
     public Series( String title,
                    String synopsis,
