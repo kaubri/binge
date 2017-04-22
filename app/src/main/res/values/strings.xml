@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Binge</string>
+    <string name="app_name">OtakuBinge</string>
+    <string name="anime_search">Search anime...</string>
 </resources>
