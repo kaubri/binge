@@ -36,10 +36,10 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search, container, false);
         mSearchList = new ArrayList<>();
-        mSearchList.add( new Series("Bleach", "Ichigo saves rukia", 5, null, 24, 1, Time.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
-        mSearchList.add( new Series("Naruto", "Ichigo saves rukia", 5, null, 24, 1, Time.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
-        mSearchList.add( new Series("Samurai Jack", "Ichigo saves rukia", 5, null, 24, 1, Time.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
-        mSearchList.add( new Series("Pokemon", "Ichigo saves rukia", 5, null, 24, 1, Time.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
+        mSearchList.add( new Series("Bleach", "Ichigo saves rukia", 5, null, 24, 1, TimeUtility.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
+        mSearchList.add( new Series("Naruto", "Ichigo saves rukia", 5, null, 24, 1, TimeUtility.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
+        mSearchList.add( new Series("Samurai Jack", "Ichigo saves rukia", 5, null, 24, 1, TimeUtility.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
+        mSearchList.add( new Series("Pokemon", "Ichigo saves rukia", 5, null, 24, 1, TimeUtility.getTotalTime(5,24), Series.Status.ONGOING, new GregorianCalendar(2011, 1, 15).getTime(), new GregorianCalendar(2017, 4, 11).getTime()));
 
         mSearchView = (SearchView) v.findViewById(R.id.series_selection_search_view);
         mRecyclerView = (RecyclerView) v.findViewById(R.id.series_selection_recycler_view);

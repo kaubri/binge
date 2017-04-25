@@ -13,7 +13,7 @@ import java.util.Date;
  * @version 1.0
  */
 
-public class Time {
+public class TimeUtility {
 
     private int mDays;
     private int mHours;
@@ -73,7 +73,7 @@ public class Time {
         return numberOfEpisodes* averageLenght;
     }
     public static int getMinsFromDates(Date startDate, Date endDate) {
-        int minsBetweenDate = Time.millisecsToMins(endDate.getTime() - startDate.getTime());
+        int minsBetweenDate = TimeUtility.millisecsToMins(endDate.getTime() - startDate.getTime());
         return minsBetweenDate;
     }
 }

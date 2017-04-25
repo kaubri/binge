@@ -3,9 +3,6 @@ package com.example.android.binge;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,10 +100,10 @@ public class SeriesInfoFragment extends Fragment {
                     Toast.makeText(getActivity(), R.string.no_episodes_alert, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                    mTotalBingeTimeTextView.setText(Time.minsToBiggestUnitString(mSeries.getTotalTime()));
+                    mTotalBingeTimeTextView.setText(TimeUtility.minsToBiggestUnitString(mSeries.getTotalTime()));
 
                     int numberOfEpisodes= Integer.valueOf(mNumberOfEpisodesEditText.getText().toString());
-                    mEndDate=TimeScheduler.getFrequencyEndDate(mSeries,mStartDate,mFrequency,numberOfEpisodes);
+                    mEndDate=TimeScheduler.getFrequencyEndDate(mSeries,mStartDate,mFrequency,numberOfEpisodes, getActivity());
 
                     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
