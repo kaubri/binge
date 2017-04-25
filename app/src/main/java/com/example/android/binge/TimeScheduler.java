@@ -1,5 +1,7 @@
 package com.example.android.binge;
 
+import android.hardware.ConsumerIrManager;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,6 +18,29 @@ public class TimeScheduler {
     private ScheduleList mScheduleList;
     private Series mSeries;
     private Date mEndDate;
+
+    public static Date getFrequencyEndDate(Series series, Date startDate, String frequency, int episodesWatched) {
+        frequency= frequency.toLowerCase();
+        int totalEpisodes= series.getNumberOfEpisodes();
+        GregorianCalendar startCalendar= new GregorianCalendar();
+        startCalendar.setTime(startDate);
+
+        if (frequency.equals("daily")) {
+            while (totalEpisodes > 0) {
+                totalEpisodes-=episodesWatched;
+                startCalendar.add(Calendar.DAY_OF_MONTH,1);
+            }
+        }
+
+        if (frequency.equals("weekly")) {
+            while (totalEpisodes > 0) {
+                totalEpisodes-=episodesWatched;
+                startCalendar.add(Calendar.WEEK_OF_MONTH,1);
+            }
+        }
+        return  startCalendar.getTime();
+
+    }
     public TimeScheduler(ScheduleList scheduleList, Series series, Date startDate) throws LowFreeTimeException {
         setScheduleList(scheduleList);
         setRemainingTime(series.getTotalTime());

@@ -56,8 +56,12 @@ public class Schedule {
     }
 
     //TODO create a validation to ensure that all non free time mins don't exceed that of the total day
-    public Schedule() {
 
+    /**
+     * Creates a Schedule with no busy time with the current date.
+     */
+    public Schedule() {
+        setDate(new Date());
     }
 
     /**
