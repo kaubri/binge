@@ -1,1 +1,1 @@
-include ':app', ':wikpediaapi'
+include ':app'
