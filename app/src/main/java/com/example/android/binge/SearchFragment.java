@@ -45,7 +45,7 @@ public class SearchFragment extends Fragment {
         mRecyclerView = (RecyclerView) v.findViewById(R.id.series_selection_recycler_view);
         mRecyclerViewFrame = (FrameLayout) v.findViewById(R.id.series_selection_frame_layout);
         mLogoImage = new ImageView(getActivity());
-        mLogoImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo));
+        mLogoImage.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_dialog_info));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateSearchResults();
 
@@ -115,7 +115,7 @@ public class SearchFragment extends Fragment {
             holder.mTitleTextView.setText(series.getTitle());
             holder.mEpisodeTextView.setText(String.valueOf(series.getNumberOfEpisodes()));
             holder.mRuntimeTextView.setText(String.valueOf(series.getTotalTime()));
-            holder.mImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo));
+            holder.mImageView.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_dialog_alert));
 
         }
 
